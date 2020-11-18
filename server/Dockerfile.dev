@@ -1,0 +1,15 @@
+# Specify where to get the base image and create a new container
+FROM node:14
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package*.json ./
+
+# Bundle app source
+COPY . .
+
+# Run the app
+EXPOSE 8000
+CMD /bin/bash -c 'npm install; npm run dev'
