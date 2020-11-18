@@ -28,4 +28,5 @@ app.use(version, authRouter)
 app.use(version, testRouter)
 
 // Listen to port
+console.log(version)
 app.listen(port, () => console.log(`Listening on port ${port}`))
