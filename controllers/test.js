@@ -11,11 +11,16 @@ const getUser = (req, res) => {
 
 const logout = (req, res) => {
     req.logout()
-    res.send(req.user)
+    res.redirect('/')
+}
+
+const authRedirect = (req, res) => {
+    res.redirect('/')
 }
 
 module.exports = {
     getTest,
     getUser,
-    logout
+    logout,
+    authRedirect
 }

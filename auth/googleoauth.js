@@ -31,7 +31,8 @@ passport.use(new GoogleStrategy({
                 done(null, existingUser)
             } else {
                 new User({
-                    googleId: profile.id
+                    googleId: profile.id,
+                    name: profile.displayName
                 })
                     .save()
                     .then(user => console.log(user))
