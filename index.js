@@ -13,6 +13,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const version = '/api/v1'
 const port = process.env.PORT || 8000
+const test
 
 // Connect to DB
 mongoose.connection()
