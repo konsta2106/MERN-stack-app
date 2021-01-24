@@ -13,6 +13,3 @@ ReactDOM.render(
     <Provider store={store}><App /></Provider>,
     document.querySelector('#root')
     )
-
-console.log(process.env.NODE_ENV)
-console.log(process.env.REACT_APP_PUB_KEY)
