@@ -15,7 +15,7 @@ const logout = (req, res) => {
 }
 
 const authRedirect = (req, res) => {
-    res.redirect('/')
+    res.redirect('/surveys')
 }
 
 module.exports = {
