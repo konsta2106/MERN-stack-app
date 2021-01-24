@@ -1,7 +1,6 @@
 const express = require('express')
 const passport = require('../auth/googleoauth')
-const { authRedirect } = require('../controllers/test')
-const test = require('../controllers/test')
+const auth = require('../controllers/authControllers')
 const requireLogin = require('../middlewares/requireLogin')
 
 // Router
@@ -10,8 +9,8 @@ const router = express.Router()
 router.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }))
-router.get('/auth/google/callback', passport.authenticate('google'), test.authRedirect)
-router.get('/currentuser', test.getUser)
-router.get('/logout', test.logout)
+router.get('/auth/google/callback', passport.authenticate('google'), auth.authRedirect)
+router.get('/currentuser', auth.getUser)
+router.get('/logout', auth.logout)
 
 module.exports = router

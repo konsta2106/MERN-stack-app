@@ -1,8 +1,8 @@
 // Modules
 const express = require('express')
 require('./models/user')
+require('./models/survey')
 const cookieSession = require('cookie-session')
-const testRouter = require('./routes/testRoutes')
 const authRouter = require('./routes/authRoutes')
 const billingRouter = require('./routes/billingRoutes')
 const mongoose = require('./database/mongoose')
@@ -28,7 +28,6 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(version, authRouter)
-app.use(version, testRouter)
 app.use(version, billingRouter)
 
 if (process.env.NODE_ENV === "production") {

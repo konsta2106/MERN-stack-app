@@ -1,6 +1,5 @@
 // Modules
 const express = require('express')
-const test = require('../controllers/test')
 const billingController = require('../controllers/billingController')
 const requireLogin = require('../middlewares/requireLogin')
 
