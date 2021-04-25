@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Survey = mongoose.model('survey')
 const Mailer = require('../services/Mailer')
 const surveyTemplate = require('../services/emailTemplates')
+const _ = require('lodash')
+const { Path } = require('path-parser')
+const { URL } = require('url')
 
 const createSurvey = async (req, res) => {
     const { title, subject, body, recipients } = req.body
@@ -34,7 +37,42 @@ const feedback = async (req, res) => {
     res.send('Thank you for voting')
 }
 
+const webhooks = async (req, res) => {
+    const p = new Path('/api/v1/surveys/:surveyId/:choice')
+    _.chain(req.body)
+        .map((event) => {
+            const match = p.test(new URL(event.url).pathname)
+            if (match) {
+                return {
+                    email: event.email,
+                    surveyId: match.surveyId,
+                    choice: match.choice
+                }
+            }
+
+        })
+        .compact()
+        .uniqBy('email', 'surveyId')
+        .each(({ surveyId, email, choice}) => {
+            Survey.updateOne({
+                _id: surveyId,
+                recipients: {
+                  $elemMatch: { email: email, responded: false }
+                }
+              }, {
+                $inc: { [choice]: 1 },
+                $set: { 'recipients.$.responded': true },
+                lastResponded: new Date()
+              }).exec()
+        })
+        .value()
+
+
+    res.send({})
+}
+
 module.exports = {
     createSurvey,
-    feedback
+    feedback,
+    webhooks,
 }

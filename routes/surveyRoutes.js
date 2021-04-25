@@ -5,6 +5,7 @@ const requireLogin = require('../middlewares/requireLogin')
 const checkCredits = require('../middlewares/checkCredits')
 
 router.post('/surveys', requireLogin, checkCredits, surveyController.createSurvey)
-router.get('/surveys/feedback', surveyController.feedback)
+router.get('/surveys/:surveyId/:choice', surveyController.feedback)
+router.post('/surveys/webhooks', surveyController.webhooks)
 
 module.exports = router
