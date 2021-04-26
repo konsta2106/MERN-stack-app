@@ -71,8 +71,16 @@ const webhooks = async (req, res) => {
     res.send({})
 }
 
+const listSurveys = async (req, res) => {
+    const surveys = await Survey.find({ userId: req.user.id})
+        .select({recipients: false})
+
+    res.send(surveys)
+}
+
 module.exports = {
     createSurvey,
     feedback,
     webhooks,
+    listSurveys,
 }
