@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class Landing extends React.Component {
     render() {
         return (
             <div style={{ textAlign: "center"}}>
-                Landing
+                <Link to={"/surveys"}><h1>Surveys</h1></Link>
             </div>
         )
     }
