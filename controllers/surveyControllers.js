@@ -29,6 +29,8 @@ const createSurvey = async (req, res) => {
         res.send(user)
     } catch (error) {
         res.status(422).send(error)
+        console.log(error)
+        console.log(req.user)
     }
 
 }

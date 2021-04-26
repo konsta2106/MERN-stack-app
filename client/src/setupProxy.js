@@ -19,12 +19,6 @@ module.exports = function (app) {
       target: "http://localhost:8000",
     })
   );
-  app.use(
-    ["/api/v1", "/surveys"],
-    createProxyMiddleware({
-      target: "http://localhost:8000",
-    })
-  );
   // app.use(
   //   ["/api/v1", "/surveys"],
   //   createProxyMiddleware({
